@@ -430,14 +430,26 @@ const Chat = () => {
         }
       
         const data = await response.json();
-        const xml = parseXmlfromString(data.outputXml)
 
-        console.log(xml);
+        let xml = null;
 
-        const serializer = new XMLSerializer();
-        const xmlText = serializer.serializeToString(xml!);
+        try {
+            xml = parseXmlfromString(data.outputXml)
+        } catch (err) {
+            console.error("Failed to parse XML string:", err);
+            console.error("XML string:", data.outputXm);
+            return data;
+        }
 
-        console.log(xmlText);
+        let xmlText = '';
+        try {
+            const serializer = new XMLSerializer();
+            xmlText = serializer.serializeToString(xml!);
+        } catch (err) {
+            console.error("Failed to serialize XML string:", err);
+            return data;
+        }
+
         localStorage.setItem('drawio-diagram', xmlText)
         
 
