@@ -1779,7 +1779,7 @@ const Chat = () => {
 
 const navigationItems = [
     {
-        path: '/',
+        path: '/oecora',
         name: 'Home',
         icon: <HiHome className="h-5 w-5" />
     },
