@@ -1784,12 +1784,12 @@ const navigationItems = [
         icon: <HiHome className="h-5 w-5" />
     },
     {
-        path: '/chat',
+        path: '/oecora/chat',
         name: 'Chat',
         icon: <HiChatAlt2 className="h-5 w-5" />
     },
     {
-        path: '/canvas',
+        path: '/oecora/canvas',
         name: 'Canvas',
         icon: <HiColorSwatch className="h-5 w-5" />
     }
@@ -1868,11 +1868,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 function App() {
     return (
         <div className="bg-white min-h-screen">
-            {/* basename is used to make the app work on GitHub Pages */}
             <Router basename="/oecora">
                 <Layout>
                     <Routes>
-                        <Route path="/oecora" element={<Home />} />
+                        <Route path="/" element={<Home />} />
                         <Route path="/chat" element={<Chat />} />
                         <Route path="/canvas" element={<Canva />} />
                     </Routes>
