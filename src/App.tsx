@@ -1067,7 +1067,7 @@ const Chat = () => {
     };
 
     async function sendChatRequest(input: string): Promise<ChatApiResponse> {
-        const response = await fetch('https://hjip65utx2.execute-api.us-east-1.amazonaws.com/Dev/process-request', {
+        const response = await fetch('https://nt61npvbxb.execute-api.us-east-2.amazonaws.com/Dev/process_test', {
           method: 'POST',
           headers: {
             'Content-Type': 'text/plain',
