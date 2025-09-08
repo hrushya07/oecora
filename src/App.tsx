@@ -1871,7 +1871,7 @@ function App() {
             <Router>
                 <Layout>
                     <Routes>
-                        <Route path="/" element={<Home />} />
+                        <Route path="/oecora" element={<Home />} />
                         <Route path="/chat" element={<Chat />} />
                         <Route path="/canvas" element={<Canva />} />
                     </Routes>
