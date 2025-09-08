@@ -1868,7 +1868,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 function App() {
     return (
         <div className="bg-white min-h-screen">
-            <Router>
+            {/* basename is used to make the app work on GitHub Pages */}
+            <Router basename="/oecora">
                 <Layout>
                     <Routes>
                         <Route path="/oecora" element={<Home />} />
