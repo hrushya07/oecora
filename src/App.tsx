@@ -430,12 +430,14 @@ const Chat = () => {
         }
       
         const data = await response.json();
-        const data2 = JSON.parse(data.body)
+        const xml = parseXmlfromString(data.outputXml)
 
-        const xml = parseXmlfromString(data2.output)
+        console.log(xml);
 
         const serializer = new XMLSerializer();
         const xmlText = serializer.serializeToString(xml!);
+
+        console.log(xmlText);
         localStorage.setItem('drawio-diagram', xmlText)
         
 
@@ -490,7 +492,7 @@ const Chat = () => {
         const tempInput = input;
         const tempFile = selectedFile;
         setInput('');
-        setSelectedFile(null); // Clear file immediately when sending
+        setSelectedFile(null);
 
         try {
             setIsLoading(true);
@@ -516,7 +518,7 @@ const Chat = () => {
             
             const botMessage: Message = {
                 sender: BOT,
-                text: data.answer || 'No response received.',
+                text: data.answer ?? '' ,
                 xmlOutput: data.outputXml || ''
             };
 
