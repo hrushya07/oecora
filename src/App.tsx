@@ -1034,6 +1034,7 @@ const Chat = () => {
         sender: Sender;
         text: string;
         xmlOutput?: string;
+        fileName?: string;
     };
 
     const [messages, setMessages] = useState<Array<Message>>([
@@ -1466,28 +1467,33 @@ const Chat = () => {
     };
 
     const handleSend = async () => {
-        if (!input.trim()) return;
+        if (!input.trim() && !selectedFile) return;
 
-        const userMessage: Message = { sender: USER, text: input };
+        const userMessage: Message = { 
+            sender: USER, 
+            text: input,
+            fileName: selectedFile?.name
+        };
         setMessages(prev => [...prev, userMessage]);
 
         const tempInput = input;
+        const tempFile = selectedFile;
         setInput('');
+        setSelectedFile(null); // Clear file immediately when sending
 
         try {
             setIsLoading(true);
             let data: ChatApiResponse;
             
-            if (selectedFile === null) {
+            if (tempFile === null) {
                 data = await sendChatRequest(tempInput);
             } else {
-                const fileContent = await convertFileToBase64(selectedFile);
+                const fileContent = await convertFileToBase64(tempFile);
                 data = await sendFileQuestionRequest(
                     tempInput,
-                    selectedFile.name,
+                    tempFile.name,
                     fileContent,
                 );
-                setSelectedFile(null);
             }
 
             // data = {
@@ -1689,6 +1695,13 @@ const Chat = () => {
                                 `}
                                 style={{maxWidth: '600px'}}
                             >
+                                {msg.fileName && (
+                                    <div className="mb-2 flex items-center gap-2">
+                                        <FiPaperclip size={16} className="opacity-70" />
+                                        <span className="text-sm opacity-70 font-medium">{msg.fileName}</span>
+                                    </div>
+                                )}
+
                                 {msg.text && (
                                     <div className={msg.xmlOutput ? 'mb-4' : ''}>
                                         {msg.text}
