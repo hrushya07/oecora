@@ -421,7 +421,7 @@ const Chat = () => {
             filename: filename,
             file_content: fileContent,
             question: input,
-            worker_name: 'stepfunction2',
+            worker_name: 'worker_lambda_xml',
           }),
         });
       
