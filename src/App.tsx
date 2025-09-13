@@ -452,7 +452,7 @@ const Chat = () => {
 
         localStorage.setItem('drawio-diagram', xmlText)
         
-
+        data.outputXml = xmlText;
         return data;
     }
 
